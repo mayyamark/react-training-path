@@ -1,5 +1,5 @@
 {
-  "name": "use-effect-cleanup-interval",
+  "name": "use-effect-cleanup-event-listener",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
