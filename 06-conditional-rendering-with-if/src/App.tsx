@@ -7,8 +7,8 @@ const App = () => {
   return (
     <>
       <button onClick={() => setIsLoggedIn(!isLoggedIn)}>
-          {isLoggedIn ? "Log out" : "Log in"}
-        </button>
+        {isLoggedIn ? "Log out" : "Log in"}
+      </button>
       <Greeting isLoggedIn={isLoggedIn} />
     </>
   );
