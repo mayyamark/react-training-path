@@ -1,11 +1,4 @@
-interface HeaderProps {
-  title: string;
-}
-
-const Header: React.FC<HeaderProps> = ({ title }) => {
-  return <h1>{title}</h1>
-}
-
+import Header from "./Header";
 
 const App = () => {
   return (
