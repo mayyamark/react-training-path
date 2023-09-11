@@ -1,10 +1,9 @@
-import { User } from "./App";
+import { useContext } from "react";
+import { UserContext } from "./context/UserContext";
 
-interface ContentProps {
-  user: User | null;
-}
+const Content = () => {
+  const { user } = useContext(UserContext);
 
-const Content: React.FC<ContentProps> = ({ user }) => {
   return (
     <div>
       {user 

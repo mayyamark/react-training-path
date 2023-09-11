@@ -1,13 +1,6 @@
 import { useState } from "react";
 import HomePage from "./HomePage";
-
-export interface User {
-  username: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  dateOfBirth: Date;
-}
+import { User, UserContext } from "./context/UserContext";
 
 const App = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -16,10 +9,14 @@ const App = () => {
   const logout = () => setUser(null);
 
   return (
-    <>
+    <UserContext.Provider value={{
+      user,
+      login,
+      logout
+    }}>
       <h1>{user ? `Welcome back, ${user.firstName}!` : "Hello!"}</h1>
-      <HomePage user={user} login={login} logout={logout} />
-    </>
+      <HomePage />
+    </UserContext.Provider>
   );
 }
 
