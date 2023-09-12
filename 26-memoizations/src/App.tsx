@@ -7,7 +7,6 @@ const App = () => {
 
   const value = useMemo(() => Math.random(), []);
 
-  // This doesn't need to be memoizet, since we are updating a state variable
   const handleIncrement = () => setCount(count + 1);
 
   const handleLog = useCallback(() => console.log("Hi"), []);
