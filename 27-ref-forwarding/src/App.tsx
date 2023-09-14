@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import TextArea from './TextArea';
 
 const App = () => {
   const ref = useRef<HTMLTextAreaElement | null>(null);
@@ -9,7 +10,7 @@ const App = () => {
 
   return (
     <div>
-      <textarea ref={ref} />
+      <TextArea ref={ref} />
       <button onClick={handleClick}>Focus Text Area</button>
     </div>
   );
