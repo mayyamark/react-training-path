@@ -15,17 +15,17 @@ const Pokemons = () => {
       try {
         setLoading(true);
         const response = await fetch("https://pokeapi.co/api/v2/pokemon");
-        const { results: pokemon } = await response.json();
+        const json = await response.json();
         
         await new Promise((resolve) => {
           setTimeout(resolve, 3000);
         });
   
-        setData(pokemon);
+        setData(json.results);
         setLoading(false);
       } catch(err) {
-        setLoading(false);
         setError(true);
+        setLoading(false);
       }
     }
 
@@ -49,4 +49,3 @@ const Pokemons = () => {
 }
 
 export default Pokemons;
-
