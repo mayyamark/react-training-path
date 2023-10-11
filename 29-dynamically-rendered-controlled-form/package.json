@@ -1,5 +1,5 @@
 {
-  "name": "controlled-form-validations",
+  "name": "dynamically-rendered-controlled-form",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
