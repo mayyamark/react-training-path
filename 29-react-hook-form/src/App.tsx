@@ -7,8 +7,6 @@ const App = () => {
     handleSubmit,
   } = useForm();
 
-  console.log(errors)
-
   return (
     <form noValidate onSubmit={handleSubmit((data) => console.log(data))}>
       <div>
