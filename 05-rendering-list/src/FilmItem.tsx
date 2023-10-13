@@ -1,4 +1,4 @@
-import { Film } from "./films";
+import { Film } from './films';
 
 interface FilmItemProps {
   film: Film;

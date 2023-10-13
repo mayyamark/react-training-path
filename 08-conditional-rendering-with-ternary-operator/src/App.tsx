@@ -1,5 +1,5 @@
-import { useState } from "react";
-import Greeting from "./Greeting";
+import { useState } from 'react';
+import Greeting from './Greeting';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -7,7 +7,7 @@ const App = () => {
   return (
     <>
       <button onClick={() => setIsLoggedIn(!isLoggedIn)}>
-        {isLoggedIn ? "Log out" : "Log in"}
+        {isLoggedIn ? 'Log out' : 'Log in'}
       </button>
       <Greeting isLoggedIn={isLoggedIn} />
     </>

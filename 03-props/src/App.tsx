@@ -1,8 +1,8 @@
-import Header from "./Header";
+import Header from './Header';
 
 const App = () => {
   return (
-    <Header title="Hello world" />
+    <Header title='Hello world' />
   );
 };
 

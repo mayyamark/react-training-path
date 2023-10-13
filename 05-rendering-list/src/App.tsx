@@ -1,5 +1,5 @@
-import FilmList from "./FilmList";
-import { films } from "./films";
+import FilmList from './FilmList';
+import { films } from './films';
 
 const App = () => {
   return (

@@ -1,4 +1,4 @@
-import Now from "./Now";
+import Now from './Now';
 
 const App = () => {
   return (
