@@ -2,28 +2,20 @@ import InputBase from '@mui/material/InputBase';
 import MuiAppBar from '@mui/material/AppBar';
 import { alpha, styled } from '@mui/material/styles';
 
-export const AppBar = styled(MuiAppBar)({
-  backgroundColor: 'black',
-});
-
-export const Image = styled('img')(({ theme }) => ({
-  display: 'none',
-
-  [theme.breakpoints.up('sm')]: {
-    display: 'flex'
-  }
+export const AppBar = styled(MuiAppBar)(({ theme }) => ({
+  backgroundColor: theme.palette.common.black,
 }));
 
 export const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: '70%',
+  display: 'none',
   [theme.breakpoints.up('sm')]: {
+    display: 'block',
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
     marginLeft: theme.spacing(1),
     width: 'auto',
   },
@@ -41,6 +33,7 @@ export const SearchIconWrapper = styled('div')(({ theme }) => ({
 
 export const Input = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
+  fontFamily: 'Virgil',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
