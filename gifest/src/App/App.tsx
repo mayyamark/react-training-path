@@ -1,10 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from "../Layout/Layout";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<div>Home page</div>}>
+        <Route path='/' element={<Layout />}>
         </Route>
       </Routes>
     </BrowserRouter>
