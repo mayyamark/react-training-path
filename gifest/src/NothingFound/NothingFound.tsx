@@ -1,8 +1,8 @@
-import Box from "@mui/material/Box/Box";
-import Button from "@mui/material/Button/Button";
 import Loader from "../Loader/Loader";
+import Button from "../Button/Button";
 import Typography from "../Typography/Typography";
 import useFetch from "../useFetch/useFetch";
+import { Container, Image } from "./NothingFound.styled";
 
 interface NothingFoundPorps {
   endpoint: string;
@@ -23,12 +23,7 @@ const NothingFound: React.FC<NothingFoundPorps> = ({ endpoint, title }) => {
       {loading && <Loader />}
       {!loading && data.length > 0 && (
         <>
-          <Box
-            width='100%' 
-            display='flex' 
-            justifyContent='center'
-            mb={3}
-          >
+          <Container>
             <Button
               color='inherit'
               variant='outlined'
@@ -36,20 +31,15 @@ const NothingFound: React.FC<NothingFoundPorps> = ({ endpoint, title }) => {
             >
               Give me another one
             </Button>
-          </Box>
-          <Box 
-            width='100%' 
-            display='flex' 
-            justifyContent='center'
-            mb={3}
-          >
-            <img
+          </Container>
+          <Container>
+            <Image
               key={data[0].id}
               src={data[0].images.original.url}
               alt={data[0].title}
               // onDoubleClick={() => onDoubleClickGif(gif.id)}
             />
-          </Box>
+          </Container>
         </>
       )}
     </div>
