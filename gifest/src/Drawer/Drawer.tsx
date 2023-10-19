@@ -25,7 +25,7 @@ const Drawer: React.FC<DrawerProps> = ({ open, onClose }) => {
       
       <Divider />
 
-      <DrawerLink to='my-gifs'>
+      <DrawerLink to='my-gifs' onClick={onClose}>
         My gifs
       </DrawerLink>
 

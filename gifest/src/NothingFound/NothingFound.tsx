@@ -3,7 +3,6 @@ import Button from "@mui/material/Button/Button";
 import Loader from "../Loader/Loader";
 import Typography from "../Typography/Typography";
 import useFetch from "../useFetch/useFetch";
-import { useState } from "react";
 
 interface NothingFoundPorps {
   endpoint: string;
@@ -11,8 +10,6 @@ interface NothingFoundPorps {
 }
 
 const NothingFound: React.FC<NothingFoundPorps> = ({ endpoint, title }) => {
-  const [count, setCount] = useState(1);
-
   const { data, loading, refreshData } = useFetch({
     url: endpoint,
     infiniteScroll: false,
@@ -35,15 +32,11 @@ const NothingFound: React.FC<NothingFoundPorps> = ({ endpoint, title }) => {
             <Button
               color='inherit'
               variant='outlined'
-              onClick={() => {
-                setCount((prev) => prev + 1);
-                refreshData();
-              }}
+              onClick={() => refreshData()}
             >
               Give me another one
             </Button>
           </Box>
-          {count > 1 && <Typography variant='h4'>#{count}</Typography>}
           <Box 
             width='100%' 
             display='flex' 

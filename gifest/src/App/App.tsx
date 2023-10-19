@@ -69,23 +69,37 @@ const App = () => {
             <Route 
               path='/favourites' 
               element={
-                <GifsPage
-                  url={`${GET_ENDPOINT}?ids=${favourites.join(',')}&api_key=${API_KEY}`}
-                  title='Favourites'
-                  onDoubleClickGif={handleFavouriteGif}
-                  infiniteScroll={false}
-                />
+                favourites.length > 0 ? (
+                  <GifsPage
+                    url={`${GET_ENDPOINT}?ids=${favourites.join(',')}&api_key=${API_KEY}`}
+                    title='Favourites'
+                    onDoubleClickGif={handleFavouriteGif}
+                    infiniteScroll={false}
+                  />
+                ) : (
+                  <NothingFound 
+                    endpoint={`${GET_ENDPOINT}/random?tag=like&api_key=${API_KEY}`}
+                    title={<>You have no favourites yet!<br />Here's a random gif for you:</>}
+                  />
+                )
               } 
             />
             <Route 
               path='/my-gifs' 
               element={
-                <GifsPage
-                  url={`${GET_ENDPOINT}?ids=${uploads.join(',')}&api_key=${API_KEY}`}
-                  title='My gifs'
-                  onDoubleClickGif={handleFavouriteGif}
-                  infiniteScroll={false}
-                />
+                uploads.length > 0 ? (
+                  <GifsPage
+                    url={`${GET_ENDPOINT}?ids=${uploads.join(',')}&api_key=${API_KEY}`}
+                    title='My gifs'
+                    onDoubleClickGif={handleFavouriteGif}
+                    infiniteScroll={false}
+                  />
+                ) : (
+                  <NothingFound 
+                    endpoint={`${GET_ENDPOINT}/random?tag=upload&api_key=${API_KEY}`}
+                    title={<>You have no uploads yet!<br />Here's a random gif for you:</>}
+                  />
+                )
               } 
             />
             <Route 
@@ -102,7 +116,7 @@ const App = () => {
               path='*' 
               element={
                 <NothingFound
-                  endpoint={`${GET_ENDPOINT}/random?api_key=${API_KEY}`}
+                  endpoint={`${GET_ENDPOINT}/random?tag=404&api_key=${API_KEY}`}
                 />
               }
             />
