@@ -12,20 +12,21 @@ const Drawer: React.FC<DrawerProps> = ({ open, onClose }) => {
   return (
     <StyledDrawer
       open={open}
+      onClick={onClose}
       onClose={onClose}
       sx={{ position: 'relative', width: '200px'}}
     >
-      <Toolbar sx={{ backgroundColor: '	#383838' }}>
+      <Toolbar sx={{ backgroundColor: '	#383838' }} >
         <HeaderTitle onClickIcon={onClose} />
       </Toolbar>
 
-      <DrawerLink to='favourites' onClick={onClose}>
+      <DrawerLink to='favourites'>
         Favourites
       </DrawerLink>
       
       <Divider />
 
-      <DrawerLink to='my-gifs' onClick={onClose}>
+      <DrawerLink to='my-gifs'>
         My gifs
       </DrawerLink>
 
