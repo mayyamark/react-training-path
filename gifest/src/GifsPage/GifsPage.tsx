@@ -1,13 +1,22 @@
 import Typography from "../Typography/Typography";
 import Masonry from '../Masonry/Masonry';
 import useFetch from "../useFetch/useFetch";
-import { API_KEY, GET_ENDPOINT } from "../constants";
 import { Box, CircularProgress } from "@mui/material";
 
-const TrendingPage = () => {
+interface GifsPageProps {
+  title: string;
+  url: string;
+  onDoubleClickGif: (id: string) => void;
+  infiniteScroll?: boolean;
+}
+
+const GifsPage: React.FC<GifsPageProps> = ({ url, title, onDoubleClickGif, infiniteScroll }) => {
   const { data, error, loading } = useFetch({
-    url: `${GET_ENDPOINT}/trending?api_key=${API_KEY}`
+    url,
+    infiniteScroll
   });
+  
+  console.log({data})
 
   if (error) {
     return (
@@ -16,10 +25,11 @@ const TrendingPage = () => {
       </Typography>
     );
   }
+
   return (
     <div>
       <Typography variant='h1'>
-        Trending
+        {title}
       </Typography>
       <Masonry>
         {data?.map((gif) => {
@@ -27,9 +37,10 @@ const TrendingPage = () => {
 
             return (
               <img
-                key={src}
+                key={gif.id}
                 src={src}
                 alt={gif.title}
+                onDoubleClick={() => onDoubleClickGif(gif.id)}
               />
             );
           })}
@@ -46,4 +57,4 @@ const TrendingPage = () => {
   );
 };
 
-export default TrendingPage;
+export default GifsPage;
