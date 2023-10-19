@@ -12,10 +12,11 @@ const useFetch = ({ url, infiniteScroll = true }: UseFetchOptions) => {
   const [error, setError] = useState(false);
   const [offset, setOffset] = useState(0);
 
-  const fetchMore = useCallback(async () => {
+  const fetchMore = useCallback(async (formattedUrl: string) => {
     try {
       setLoading(true);
-      const response = await fetch(`${url}&offset=${offset}`);
+
+      const response = await fetch(formattedUrl);
       const json = await response.json();
       
       if (json.meta.status >= 400) {
@@ -24,7 +25,11 @@ const useFetch = ({ url, infiniteScroll = true }: UseFetchOptions) => {
       }
 
       if (json.data) {
-        setData(prevItems => [...prevItems, ...json.data]);
+        if (infiniteScroll) {
+          setData(prevItems => [...prevItems, ...json.data]);
+        } else {
+          setData(json.data);
+        }
       }
 
     } catch (error) {
@@ -33,20 +38,21 @@ const useFetch = ({ url, infiniteScroll = true }: UseFetchOptions) => {
     } finally {
       setLoading(false);
     }
-  }, [offset, url]);
+  }, [infiniteScroll]);
 
   const handleScroll = useCallback(() => {
     if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || loading) {
       return;
     }
 
-    setOffset((prev) => prev + 40);
-    fetchMore();
-  }, [fetchMore, loading]);
+    const newOffset = offset + 50;
+    setOffset(newOffset);
+    fetchMore(`${url}&offset=${newOffset}`);
+  }, [loading, offset, url, fetchMore]);
 
   useEffect(() => {
-    fetchMore();
-  }, [fetchMore]);
+    fetchMore(url);
+  }, [url, fetchMore]);
 
   useEffect(() => {
     if (infiniteScroll) {
