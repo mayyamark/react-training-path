@@ -2,9 +2,10 @@ import Typography from "../Typography/Typography";
 import Masonry from '../Masonry/Masonry';
 import useFetch from "../useFetch/useFetch";
 import { API_KEY, GET_ENDPOINT } from "../constants";
+import { Box, CircularProgress } from "@mui/material";
 
 const TrendingPage = () => {
-  const { data, error } = useFetch({
+  const { data, error, loading } = useFetch({
     url: `${GET_ENDPOINT}/trending?api_key=${API_KEY}`
   });
 
@@ -33,6 +34,14 @@ const TrendingPage = () => {
             );
           })}
       </Masonry>
+      {loading && (
+        <Box 
+          display='flex' 
+          justifyContent='center'
+        >
+          <CircularProgress color='inherit' />
+        </Box>
+      )}
     </div>
   );
 };
