@@ -7,10 +7,15 @@ import { useState, useEffect } from "react";
 
 const App = () => {
   const [favourites, setFavourites] = useState<string[]>(JSON.parse(localStorage.getItem('favourite-gifs') as string) || []);
+  const [uploads, setUploads] = useState(JSON.parse(localStorage.getItem('uploaded-gifs') as string) ||[]);
 
   useEffect(() => {
     localStorage.setItem('favourite-gifs', JSON.stringify(favourites));
   }, [favourites]);
+
+  useEffect(() => {
+    localStorage.setItem('uploaded-gifs', JSON.stringify(uploads));
+  }, [uploads]);
 
   const handleFavouriteGif = (id: string) => {
     setFavourites((prev) => {
@@ -44,6 +49,17 @@ const App = () => {
                 <GifsPage
                   url={`${GET_ENDPOINT}?ids=${favourites.join(',')}&api_key=${API_KEY}`}
                   title='Favourites'
+                  onDoubleClickGif={handleFavouriteGif}
+                  infiniteScroll={false}
+                />
+              } 
+            />
+            <Route 
+              path='/my-gifs' 
+              element={
+                <GifsPage
+                  url={`${GET_ENDPOINT}?ids=${uploads.join(',')}&api_key=${API_KEY}`}
+                  title='My gifs'
                   onDoubleClickGif={handleFavouriteGif}
                   infiniteScroll={false}
                 />
