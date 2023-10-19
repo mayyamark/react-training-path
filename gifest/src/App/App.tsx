@@ -4,6 +4,7 @@ import GifsPage from "../GifsPage/GifsPage";
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import { API_KEY, GET_ENDPOINT } from "../constants";
 import { useState, useEffect, ChangeEvent } from "react";
+import NothingFound from "../NothingFound/NothingFound";
 
 const App = () => {
   const [query, setQuery] = useState((
@@ -95,7 +96,15 @@ const App = () => {
                   title={`We found these "${query}" gifs:`}
                   onDoubleClickGif={handleFavouriteGif}
                 />
-              } 
+              }
+            />
+            <Route 
+              path='*' 
+              element={
+                <NothingFound
+                  endpoint={`${GET_ENDPOINT}/random?api_key=${API_KEY}`}
+                />
+              }
             />
           </Route>
         </Routes>

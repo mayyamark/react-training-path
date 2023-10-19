@@ -12,7 +12,7 @@ const useFetch = ({ url, infiniteScroll = true }: UseFetchOptions) => {
   const [error, setError] = useState(false);
   const [offset, setOffset] = useState(0);
 
-  const fetchMore = useCallback(async (formattedUrl: string) => {
+  const fetchData = useCallback(async (formattedUrl: string) => {
     try {
       setLoading(true);
 
@@ -28,7 +28,11 @@ const useFetch = ({ url, infiniteScroll = true }: UseFetchOptions) => {
         if (infiniteScroll) {
           setData(prevItems => [...prevItems, ...json.data]);
         } else {
-          setData(json.data);
+          if (Array.isArray(json.data)) {
+            setData(json.data);
+          } else {
+            setData([json.data]);
+          }
         }
       }
 
@@ -47,13 +51,13 @@ const useFetch = ({ url, infiniteScroll = true }: UseFetchOptions) => {
 
     const newOffset = offset + 50;
     setOffset(newOffset);
-    fetchMore(`${url}&offset=${newOffset}`);
-  }, [loading, offset, url, fetchMore]);
+    fetchData(`${url}&offset=${newOffset}`);
+  }, [loading, offset, url, fetchData]);
 
   useEffect(() => {
     setData([]);
-    fetchMore(url);
-  }, [url, fetchMore]);
+    fetchData(url);
+  }, [url, fetchData]);
 
   useEffect(() => {
     if (infiniteScroll) {
@@ -62,7 +66,7 @@ const useFetch = ({ url, infiniteScroll = true }: UseFetchOptions) => {
     }
   }, [infiniteScroll, handleScroll]);
 
-  return { loading, error, data };
+  return { loading, error, data, refreshData: () => fetchData(url) };
 };
 
 export default useFetch;
