@@ -4,10 +4,17 @@ import useFetch from "../useFetch/useFetch";
 import { API_KEY, GET_ENDPOINT } from "../constants";
 
 const TrendingPage = () => {
-  const { data } = useFetch({
+  const { data, error } = useFetch({
     url: `${GET_ENDPOINT}/trending?api_key=${API_KEY}`
   });
 
+  if (error) {
+    return (
+      <Typography variant='h3'>
+        An error while fetching the data occurred!
+      </Typography>
+    );
+  }
   return (
     <div>
       <Typography variant='h1'>

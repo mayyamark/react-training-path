@@ -15,13 +15,21 @@ const useFetch = ({ url, infiniteScroll = true }: UseFetchOptions) => {
   const fetchMore = useCallback(async () => {
     try {
       setLoading(true);
-      setError(false);
       const response = await fetch(`${url}&offset=${offset}`);
-      const data = await response.json();
-  
-      setData(prevItems => [...prevItems, ...data.data]);
+      const json = await response.json();
+      
+      if (json.meta.status >= 400) {
+        setError(true);
+        throw new Error('An error while fetching the data occurred!');
+      }
+
+      if (json.data) {
+        setData(prevItems => [...prevItems, ...json.data]);
+      }
+
     } catch (error) {
       setError(true);
+      throw new Error('An error while fetching the data occurred!');
     } finally {
       setLoading(false);
     }
