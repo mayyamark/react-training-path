@@ -19,7 +19,7 @@ const Drawer: React.FC<DrawerProps> = ({ open, onClose }) => {
         <HeaderTitle onClickIcon={onClose} />
       </Toolbar>
 
-      <DrawerLink to='favourites'>
+      <DrawerLink to='favourites' onClick={onClose}>
         Favourites
       </DrawerLink>
       

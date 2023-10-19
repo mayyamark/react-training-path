@@ -1,7 +1,7 @@
 import Typography from "../Typography/Typography";
 import Masonry from '../Masonry/Masonry';
 import useFetch from "../useFetch/useFetch";
-import { Box, CircularProgress } from "@mui/material";
+import Loader from "../Loader/Loader";
 
 interface GifsPageProps {
   title: string;
@@ -30,27 +30,16 @@ const GifsPage: React.FC<GifsPageProps> = ({ url, title, onDoubleClickGif, infin
         {title}
       </Typography>
       <Masonry>
-        {data?.map((gif) => {
-            const src = gif.images.preview_gif.url || gif.images.original.url;
-
-            return (
-              <img
-                key={gif.id}
-                src={src}
-                alt={gif.title}
-                onDoubleClick={() => onDoubleClickGif(gif.id)}
-              />
-            );
-          })}
+        {data?.map((gif) => (
+          <img
+            key={gif.id}
+            src={gif.images.preview_gif.url}
+            alt={gif.title}
+            onDoubleClick={() => onDoubleClickGif(gif.id)}
+          />)
+        )}
       </Masonry>
-      {loading && (
-        <Box 
-          display='flex' 
-          justifyContent='center'
-        >
-          <CircularProgress color='inherit' />
-        </Box>
-      )}
+      {loading && <Loader />}
     </div>
   );
 };
