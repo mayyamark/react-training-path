@@ -15,8 +15,6 @@ const GifsPage: React.FC<GifsPageProps> = ({ url, title, onDoubleClickGif, infin
     url,
     infiniteScroll
   });
-  
-  console.log({data})
 
   if (error) {
     return (

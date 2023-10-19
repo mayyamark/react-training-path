@@ -3,11 +3,21 @@ import Layout from "../Layout/Layout";
 import GifsPage from "../GifsPage/GifsPage";
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import { API_KEY, GET_ENDPOINT } from "../constants";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 
 const App = () => {
-  const [favourites, setFavourites] = useState<string[]>(JSON.parse(localStorage.getItem('favourite-gifs') as string) || []);
-  const [uploads, setUploads] = useState(JSON.parse(localStorage.getItem('uploaded-gifs') as string) ||[]);
+  const [query, setQuery] = useState((
+    new URL(window.location.href).searchParams.get('query')
+    ) || ''
+  );
+  const [favourites, setFavourites] = useState<string[]>((
+    JSON.parse(localStorage.getItem('favourite-gifs') as string)
+    ) || []
+  );
+  const [uploads, setUploads] = useState((
+    JSON.parse(localStorage.getItem('uploaded-gifs') as string)
+    ) || []
+  );
 
   useEffect(() => {
     localStorage.setItem('favourite-gifs', JSON.stringify(favourites));
@@ -31,7 +41,19 @@ const App = () => {
     <ErrorBoundary>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Layout />}>
+          <Route 
+            path='/' 
+            element={(
+              <Layout 
+                inputProps={{
+                  value: query, 
+                  onChange: (ev: ChangeEvent<HTMLInputElement>) => (
+                    setQuery(ev.target.value)
+                  ),
+                }}
+              />
+            )}
+          >
             <Route 
               path='/' 
               index 
@@ -62,6 +84,16 @@ const App = () => {
                   title='My gifs'
                   onDoubleClickGif={handleFavouriteGif}
                   infiniteScroll={false}
+                />
+              } 
+            />
+            <Route 
+              path='/search' 
+              element={
+                <GifsPage
+                  url={`${GET_ENDPOINT}/search?q=${query}&api_key=${API_KEY}`}
+                  title={`We found these "${query}" gifs:`}
+                  onDoubleClickGif={handleFavouriteGif}
                 />
               } 
             />

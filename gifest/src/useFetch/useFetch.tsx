@@ -51,6 +51,7 @@ const useFetch = ({ url, infiniteScroll = true }: UseFetchOptions) => {
   }, [loading, offset, url, fetchMore]);
 
   useEffect(() => {
+    setData([]);
     fetchMore(url);
   }, [url, fetchMore]);
 
