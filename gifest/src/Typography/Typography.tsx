@@ -16,7 +16,15 @@ const Typography = styled(MuiTypography)(({ theme, variant }) => ({
     [theme.breakpoints.up('md')]: {
       fontSize: '6rem', 
     },
-  })
+  }),
+
+  ...(variant === 'h2' && {
+    fontSize: '2.75rem', 
+
+    [theme.breakpoints.up('md')]: {
+      fontSize: '3.75rem', 
+    },
+  }),
 }));
 
 export default Typography;
