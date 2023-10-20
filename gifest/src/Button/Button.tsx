@@ -1,7 +1,10 @@
-import MuiButton from "@mui/material/Button";
+import MuiButton, { ButtonProps } from "@mui/material/Button";
 import styled from "@mui/material/styles/styled";
 
-const Button = styled(MuiButton)(({ theme, variant }) => ({
+const Button = styled(
+  (props: ButtonProps) => (
+    <MuiButton variant='outlined' color='inherit' {...props} />
+  ))(({ theme }) => ({
   fontFamily: 'Virgil',
   marginBottom: theme.spacing(3),
 
