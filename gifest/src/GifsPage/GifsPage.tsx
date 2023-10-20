@@ -1,7 +1,8 @@
 import Typography from "../Typography/Typography";
 import Masonry from '../Masonry/Masonry';
-import useFetch from "../useFetch/useFetch";
+import useGetData from "../useGetData/useGetData";
 import Loader from "../Loader/Loader";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 interface GifsPageProps {
   title: string;
@@ -11,17 +12,13 @@ interface GifsPageProps {
 }
 
 const GifsPage: React.FC<GifsPageProps> = ({ url, title, onDoubleClickGif, infiniteScroll }) => {
-  const { data, error, loading } = useFetch({
+  const { data, error, loading } = useGetData({
     url,
     infiniteScroll
   });
 
   if (error) {
-    return (
-      <Typography variant='h3'>
-        An error while fetching the data occurred!
-      </Typography>
-    );
+    return <ErrorMessage />;
   }
 
   return (
@@ -33,7 +30,7 @@ const GifsPage: React.FC<GifsPageProps> = ({ url, title, onDoubleClickGif, infin
         {data?.map((gif) => (
           <img
             key={gif.id}
-            src={gif.images.preview_gif.url}
+            src={gif.images.downsized_medium.url}
             alt={gif.title}
             onDoubleClick={() => onDoubleClickGif(gif.id)}
           />)
