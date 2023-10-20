@@ -23,8 +23,6 @@ const UploadPage: React.FC<UploadPageProps> = ({
     url: endpoint,
   });
 
-  console.log(file);
-
   const handleUpload = async () => {
     if (!file) {
       return null;

@@ -31,8 +31,6 @@ const useUploadData = ({ url }: UseUploadDataOptions) => {
 
       if (response.status === 200) {
         if (onUploadCallback) {
-          console.log('here hook')
-          
           onUploadCallback(json.data.id);
         }
         setSuccess(true);

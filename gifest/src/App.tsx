@@ -1,6 +1,5 @@
 import { useState, useEffect, ChangeEvent } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { API_KEY, GET_ENDPOINT, UPLOAD_ENDPOINT } from './constants';
 import ErrorBoundary from './components/molecules/ErrorBoundary/ErrorBoundary';
 import Layout from './components/molecules/Layout/Layout';
 import GifsPage from './components/organisms/GifsPage/GifsPage';
@@ -63,7 +62,7 @@ const App = () => {
               index 
               element={
                 <GifsPage 
-                  url={`${GET_ENDPOINT}/trending?api_key=${API_KEY}`}
+                  url={`${process.env.REACT_APP_GET_ENDPOINT}/trending?api_key=${process.env.REACT_APP_API_KEY}`}
                   title='Trending'
                   updateFavourites={handleFavourite}
                   isFavourite={isFavourite}
@@ -75,7 +74,7 @@ const App = () => {
               element={
                 favourites.length > 0 ? (
                   <GifsPage
-                    url={`${GET_ENDPOINT}?ids=${favourites.join(',')}&api_key=${API_KEY}`}
+                    url={`${process.env.REACT_APP_GET_ENDPOINT}?ids=${favourites.join(',')}&api_key=${process.env.REACT_APP_API_KEY}`}
                     title='Favourites'
                     updateFavourites={handleFavourite}
                     isFavourite={isFavourite}
@@ -83,7 +82,7 @@ const App = () => {
                   />
                 ) : (
                   <NothingFoundPage 
-                    endpoint={`${GET_ENDPOINT}/random?tag=like&api_key=${API_KEY}`}
+                    endpoint={`${process.env.REACT_APP_GET_ENDPOINT}/random?tag=like&api_key=${process.env.REACT_APP_API_KEY}`}
                     title={<>You have no favourites yet!<br />Here's a random gif for you:</>}
                   />
                 )
@@ -94,7 +93,7 @@ const App = () => {
               element={
                 uploads.length > 0 ? (
                   <GifsPage
-                    url={`${GET_ENDPOINT}?ids=${uploads.join(',')}&api_key=${API_KEY}`}
+                    url={`${process.env.REACT_APP_GET_ENDPOINT}?ids=${uploads.join(',')}&api_key=${process.env.REACT_APP_API_KEY}`}
                     title='My gifs'
                     updateFavourites={handleFavourite}
                     isFavourite={isFavourite}
@@ -102,7 +101,7 @@ const App = () => {
                   />
                 ) : (
                   <NothingFoundPage 
-                    endpoint={`${GET_ENDPOINT}/random?tag=upload&api_key=${API_KEY}`}
+                    endpoint={`${process.env.REACT_APP_GET_ENDPOINT}/random?tag=upload&api_key=${process.env.REACT_APP_API_KEY}`}
                     title={<>You have no uploads yet!<br />Here's a random gif for you:</>}
                   />
                 )
@@ -112,7 +111,7 @@ const App = () => {
               path='/search' 
               element={
                 <GifsPage
-                  url={`${GET_ENDPOINT}/search?q=${query}&api_key=${API_KEY}`}
+                  url={`${process.env.REACT_APP_GET_ENDPOINT}/search?q=${query}&api_key=${process.env.REACT_APP_API_KEY}`}
                   title={`We found these '${query}' gifs:`}
                   updateFavourites={handleFavourite}
                   isFavourite={isFavourite}
@@ -123,9 +122,8 @@ const App = () => {
               path='/upload' 
               element={(
                 <UploadPage 
-                  endpoint={`${UPLOAD_ENDPOINT}?api_key=${API_KEY}`}
+                  endpoint={`${process.env.REACT_APP_UPLOAD_ENDPOINT}?api_key=${process.env.REACT_APP_API_KEY}`}
                   onUploadCallback={(id: string) => {
-                    console.log('here App')
                     setUploads((prev: string[]) => [...prev, id])
                   }}
                 />
@@ -135,7 +133,7 @@ const App = () => {
               path='*' 
               element={
                 <NothingFoundPage
-                  endpoint={`${GET_ENDPOINT}/random?tag=404&api_key=${API_KEY}`}
+                  endpoint={`${process.env.REACT_APP_GET_ENDPOINT}/random?tag=404&api_key=${process.env.REACT_APP_API_KEY}`}
                 />
               }
             />
