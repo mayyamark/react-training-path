@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { GIFObject } from "../types";
 
-interface UseFetchOptions {
+interface UseGetDataOptions {
   url: string;
   infiniteScroll?: boolean;
 }
 
-const useFetch = ({ url, infiniteScroll = true }: UseFetchOptions) => {
+const useGetData = ({ url, infiniteScroll = true }: UseGetDataOptions) => {
   const [data, setData] = useState<GIFObject[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -69,4 +69,4 @@ const useFetch = ({ url, infiniteScroll = true }: UseFetchOptions) => {
   return { loading, error, data, refreshData: () => fetchData(url) };
 };
 
-export default useFetch;
+export default useGetData;
