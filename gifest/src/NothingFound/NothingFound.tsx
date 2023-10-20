@@ -1,8 +1,9 @@
 import Loader from "../Loader/Loader";
 import Button from "../Button/Button";
 import Typography from "../Typography/Typography";
-import useFetch from "../useFetch/useFetch";
-import { Container, Image } from "./NothingFound.styled";
+import useGetData from "../useGetData/useGetData";
+import FlexContainer from "../FlexContainer/FlexContainer";
+import { Image } from "./NothingFound.styled";
 
 interface NothingFoundPorps {
   endpoint: string;
@@ -10,7 +11,7 @@ interface NothingFoundPorps {
 }
 
 const NothingFound: React.FC<NothingFoundPorps> = ({ endpoint, title }) => {
-  const { data, loading, refreshData } = useFetch({
+  const { data, loading, refreshData } = useGetData({
     url: endpoint,
     infiniteScroll: false,
   });
@@ -23,23 +24,18 @@ const NothingFound: React.FC<NothingFoundPorps> = ({ endpoint, title }) => {
       {loading && <Loader />}
       {!loading && data.length > 0 && (
         <>
-          <Container>
-            <Button
-              color='inherit'
-              variant='outlined'
-              onClick={() => refreshData()}
-            >
+          <FlexContainer>
+            <Button onClick={() => refreshData()}>
               Give me another one
             </Button>
-          </Container>
-          <Container>
+          </FlexContainer>
+          <FlexContainer>
             <Image
               key={data[0].id}
               src={data[0].images.original.url}
               alt={data[0].title}
-              // onDoubleClick={() => onDoubleClickGif(gif.id)}
             />
-          </Container>
+          </FlexContainer>
         </>
       )}
     </div>
