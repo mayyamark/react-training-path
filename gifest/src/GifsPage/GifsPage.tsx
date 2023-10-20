@@ -1,6 +1,6 @@
 import Typography from "../Typography/Typography";
 import Masonry from '../Masonry/Masonry';
-import useGetData from "../useGetData/useGetData";
+import useGetData from "../hooks/useGetData/useGetData";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Gif from "../Gif/Gif";

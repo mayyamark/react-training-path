@@ -1,7 +1,7 @@
 import Loader from "../Loader/Loader";
 import Button from "../Button/Button";
 import Typography from "../Typography/Typography";
-import useGetData from "../useGetData/useGetData";
+import useGetData from "../hooks/useGetData/useGetData";
 import FlexContainer from "../FlexContainer/FlexContainer";
 import { Image } from "./NothingFound.styled";
 

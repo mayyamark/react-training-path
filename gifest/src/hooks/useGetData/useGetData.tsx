@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { GifObject } from "../types";
+import { GifObject } from "../../types";
 
 interface UseGetDataOptions {
   url: string;

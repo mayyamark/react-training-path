@@ -4,7 +4,7 @@ import Typography from "../Typography/Typography";
 import UploadButton from "../UploadButton/UploadButton";
 import Button from "../Button/Button";
 import { Container } from './UploadPage.styled';
-import useUploadData from "../useUploadData/useUploadData";
+import useUploadData from "../hooks/useUploadData/useUploadData";
 import Loader from "../Loader/Loader";
 import { Link } from "react-router-dom";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
