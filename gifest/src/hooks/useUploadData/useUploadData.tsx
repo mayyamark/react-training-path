@@ -4,12 +4,10 @@ interface UseUploadDataOptions {
   url: string;
 }
 
-
 interface UploadDataOptions {
   body: FormData;
   onUploadCallback?: (postedDataId: string) => void;
 }
-
 
 const useUploadData = ({ url }: UseUploadDataOptions) => {
   const [loading, setLoading] = useState(false);
