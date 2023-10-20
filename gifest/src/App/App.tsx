@@ -2,9 +2,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "../Layout/Layout";
 import GifsPage from "../GifsPage/GifsPage";
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
-import { API_KEY, GET_ENDPOINT } from "../constants";
+import { API_KEY, GET_ENDPOINT, UPLOAD_ENDPOINT } from "../constants";
 import { useState, useEffect, ChangeEvent } from "react";
 import NothingFound from "../NothingFound/NothingFound";
+import UploadPage from "../UploadPage/UploadPage";
 
 const App = () => {
   const [query, setQuery] = useState((
@@ -38,6 +39,7 @@ const App = () => {
     });
   }
 
+  console.log({favourites, uploads})
   return (
     <ErrorBoundary>
       <BrowserRouter>
@@ -111,6 +113,18 @@ const App = () => {
                   onDoubleClickGif={handleFavouriteGif}
                 />
               }
+            />
+            <Route 
+              path='/upload' 
+              element={(
+                <UploadPage 
+                  endpoint={`${UPLOAD_ENDPOINT}?api_key=${API_KEY}`}
+                  onUploadCallback={(id: string) => {
+                    console.log('here App')
+                    setUploads((prev: string[]) => [...prev, id])
+                  }}
+                />
+              )} 
             />
             <Route 
               path='*' 
