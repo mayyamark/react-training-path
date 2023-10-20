@@ -3,15 +3,23 @@ import Masonry from '../Masonry/Masonry';
 import useGetData from "../useGetData/useGetData";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import Gif from "../Gif/Gif";
 
 interface GifsPageProps {
   title: string;
   url: string;
-  onDoubleClickGif: (id: string) => void;
+  updateFavourites: (id: string) => void;
+  isFavourite: (id: string) => boolean;
   infiniteScroll?: boolean;
 }
 
-const GifsPage: React.FC<GifsPageProps> = ({ url, title, onDoubleClickGif, infiniteScroll }) => {
+const GifsPage: React.FC<GifsPageProps> = ({ 
+  url, 
+  title, 
+  updateFavourites,
+  isFavourite, 
+  infiniteScroll 
+}) => {
   const { data, error, loading } = useGetData({
     url,
     infiniteScroll
@@ -28,11 +36,11 @@ const GifsPage: React.FC<GifsPageProps> = ({ url, title, onDoubleClickGif, infin
       </Typography>
       <Masonry>
         {data?.map((gif) => (
-          <img
+          <Gif 
             key={gif.id}
-            src={gif.images.downsized_medium.url}
-            alt={gif.title}
-            onDoubleClick={() => onDoubleClickGif(gif.id)}
+            gif={gif}
+            updateFavourites={updateFavourites}
+            isFavourite={isFavourite}
           />)
         )}
       </Masonry>

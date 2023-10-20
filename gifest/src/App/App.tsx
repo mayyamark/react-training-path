@@ -29,7 +29,7 @@ const App = () => {
     localStorage.setItem('uploaded-gifs', JSON.stringify(uploads));
   }, [uploads]);
 
-  const handleFavouriteGif = (id: string) => {
+  const handleFavourite = (id: string) => {
     setFavourites((prev) => {
       if (prev.includes(id)) {
         return prev.filter((i) => i !== id);
@@ -37,9 +37,10 @@ const App = () => {
         return [...prev, id];
       }
     });
-  }
+  };
 
-  console.log({favourites, uploads})
+  const isFavourite = (id: string) => favourites.includes(id);
+
   return (
     <ErrorBoundary>
       <BrowserRouter>
@@ -64,7 +65,8 @@ const App = () => {
                 <GifsPage 
                   url={`${GET_ENDPOINT}/trending?api_key=${API_KEY}`}
                   title='Trending'
-                  onDoubleClickGif={handleFavouriteGif}
+                  updateFavourites={handleFavourite}
+                  isFavourite={isFavourite}
                 />
               } 
             />
@@ -75,7 +77,8 @@ const App = () => {
                   <GifsPage
                     url={`${GET_ENDPOINT}?ids=${favourites.join(',')}&api_key=${API_KEY}`}
                     title='Favourites'
-                    onDoubleClickGif={handleFavouriteGif}
+                    updateFavourites={handleFavourite}
+                    isFavourite={isFavourite}
                     infiniteScroll={false}
                   />
                 ) : (
@@ -93,7 +96,8 @@ const App = () => {
                   <GifsPage
                     url={`${GET_ENDPOINT}?ids=${uploads.join(',')}&api_key=${API_KEY}`}
                     title='My gifs'
-                    onDoubleClickGif={handleFavouriteGif}
+                    updateFavourites={handleFavourite}
+                    isFavourite={isFavourite}
                     infiniteScroll={false}
                   />
                 ) : (
@@ -110,7 +114,8 @@ const App = () => {
                 <GifsPage
                   url={`${GET_ENDPOINT}/search?q=${query}&api_key=${API_KEY}`}
                   title={`We found these "${query}" gifs:`}
-                  onDoubleClickGif={handleFavouriteGif}
+                  updateFavourites={handleFavourite}
+                  isFavourite={isFavourite}
                 />
               }
             />

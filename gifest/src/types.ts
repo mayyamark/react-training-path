@@ -61,7 +61,7 @@ interface Images {
   preview_gif: ImageCommon;
 }
 
-export interface GIFObject {
+export interface GifObject {
   type: string;
   id: string;
   slug: string;

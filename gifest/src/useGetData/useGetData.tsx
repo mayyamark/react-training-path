@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { GIFObject } from "../types";
+import { GifObject } from "../types";
 
 interface UseGetDataOptions {
   url: string;
@@ -7,7 +7,7 @@ interface UseGetDataOptions {
 }
 
 const useGetData = ({ url, infiniteScroll = true }: UseGetDataOptions) => {
-  const [data, setData] = useState<GIFObject[]>([]);
+  const [data, setData] = useState<GifObject[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [offset, setOffset] = useState(0);
