@@ -28,9 +28,11 @@ const App = () => {
     localStorage.setItem('uploaded-gifs', JSON.stringify(uploads));
   }, [uploads]);
 
+  const isFavourite = (id: string) => favourites.includes(id);
+
   const handleFavourite = (id: string) => {
     setFavourites((prev) => {
-      if (prev.includes(id)) {
+      if (isFavourite(id)) {
         return prev.filter((i) => i !== id);
       } else {
         return [...prev, id];
@@ -38,7 +40,6 @@ const App = () => {
     });
   };
 
-  const isFavourite = (id: string) => favourites.includes(id);
 
   return (
     <ErrorBoundary>
@@ -62,7 +63,7 @@ const App = () => {
               index 
               element={
                 <GifsPage 
-                  url={`${process.env.REACT_APP_GET_ENDPOINT}/trending?api_key=${process.env.REACT_APP_API_KEY}`}
+                  endpoint={`${process.env.REACT_APP_GET_ENDPOINT}/trending?api_key=${process.env.REACT_APP_API_KEY}`}
                   title='Trending'
                   updateFavourites={handleFavourite}
                   isFavourite={isFavourite}
@@ -70,11 +71,22 @@ const App = () => {
               } 
             />
             <Route 
+              path='/search' 
+              element={
+                <GifsPage
+                  endpoint={`${process.env.REACT_APP_GET_ENDPOINT}/search?q=${query}&api_key=${process.env.REACT_APP_API_KEY}`}
+                  title={`We found these '${query}' gifs:`}
+                  updateFavourites={handleFavourite}
+                  isFavourite={isFavourite}
+                />
+              }
+            />
+            <Route 
               path='/favourites' 
               element={
                 favourites.length > 0 ? (
                   <GifsPage
-                    url={`${process.env.REACT_APP_GET_ENDPOINT}?ids=${favourites.join(',')}&api_key=${process.env.REACT_APP_API_KEY}`}
+                    endpoint={`${process.env.REACT_APP_GET_ENDPOINT}?ids=${favourites.join(',')}&api_key=${process.env.REACT_APP_API_KEY}`}
                     title='Favourites'
                     updateFavourites={handleFavourite}
                     isFavourite={isFavourite}
@@ -93,7 +105,7 @@ const App = () => {
               element={
                 uploads.length > 0 ? (
                   <GifsPage
-                    url={`${process.env.REACT_APP_GET_ENDPOINT}?ids=${uploads.join(',')}&api_key=${process.env.REACT_APP_API_KEY}`}
+                    endpoint={`${process.env.REACT_APP_GET_ENDPOINT}?ids=${uploads.join(',')}&api_key=${process.env.REACT_APP_API_KEY}`}
                     title='My gifs'
                     updateFavourites={handleFavourite}
                     isFavourite={isFavourite}
@@ -106,17 +118,6 @@ const App = () => {
                   />
                 )
               } 
-            />
-            <Route 
-              path='/search' 
-              element={
-                <GifsPage
-                  url={`${process.env.REACT_APP_GET_ENDPOINT}/search?q=${query}&api_key=${process.env.REACT_APP_API_KEY}`}
-                  title={`We found these '${query}' gifs:`}
-                  updateFavourites={handleFavourite}
-                  isFavourite={isFavourite}
-                />
-              }
             />
             <Route 
               path='/upload' 

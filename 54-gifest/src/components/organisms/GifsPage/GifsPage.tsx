@@ -7,21 +7,21 @@ import Gif from '../../molecules/Gif/Gif';
 
 interface GifsPageProps {
   title: string;
-  url: string;
+  endpoint: string;
   updateFavourites: (id: string) => void;
   isFavourite: (id: string) => boolean;
   infiniteScroll?: boolean;
 }
 
 const GifsPage: React.FC<GifsPageProps> = ({ 
-  url, 
+  endpoint, 
+  infiniteScroll,
   title, 
   updateFavourites,
   isFavourite, 
-  infiniteScroll 
 }) => {
   const { data, error, loading } = useGetData({
-    url,
+    url: endpoint,
     infiniteScroll
   });
 
