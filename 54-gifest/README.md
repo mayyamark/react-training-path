@@ -1,6 +1,22 @@
-# Getting Started with Create React App
+# Gifest
 
+This is a SPA for viewing and uploading gifs with the following pages and functionalities:
+- A page with infinite scroll, that displays trending gifs
+  - Each gif could be liked by double-clicing on it
+  - Hovering an individual gif, displays its details
+- A header with search field, that allows users to search gifs by keyword form any page
+A page, that displays all liked gifs
+- A page for uploading a gif
+- A page, that displays all uploaded gifs
+
+## Project structure
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+It follows the [Atomic Design Methodology](https://atomicdesign.bradfrost.com/chapter-2/#:~:text=Atomic%20design%20is%20atoms%2C%20molecules,parts%20at%20the%20same%20time.).
+In the [public](./public/) directory we can find all assets and our html file.
+In the [src](./src/) directory we have all the logic - components, custom hooks, generic types, etc.
+
+## Environment variables
+In the project directory, there is a [`.template.env`](./.template.env) file. You can use it by renaming it to `.env`. The only change you need to make is to generate your own [Giphy API key](https://developers.giphy.com/dashboard/?create=true).
 
 ## Available Scripts
 
@@ -43,4 +59,4 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To learn React, check out the [React documentation](https://react.dev/).
